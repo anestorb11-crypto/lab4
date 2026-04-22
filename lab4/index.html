@@ -59,20 +59,20 @@
 
     <div class="sidebar-section">
       <h3>Технічні навички</h3>
-      <div class="skill-bar-item"><span class="skill-bar-label">Windows</span><div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">Linux</span><div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">IP / TCP / UDP</span><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">Cisco Packet Tracer</span><div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">Network Hardening</span><div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">System Protection</span><div class="skill-bar"><div class="skill-bar-fill" data-width="72"></div></div></div>
+      <div class="skill-list-item">Windows</div>
+      <div class="skill-list-item">Linux</div>
+      <div class="skill-list-item">IP / TCP / UDP</div>
+      <div class="skill-list-item">Cisco Packet Tracer</div>
+      <div class="skill-list-item">Network Hardening</div>
+      <div class="skill-list-item">System Protection</div>
     </div>
 
     <div class="sidebar-section">
       <h3>Soft Skills</h3>
-      <div class="skill-bar-item"><span class="skill-bar-label">Командна робота</span><div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">Комунікабельність</span><div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">Увага до деталей</span><div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div></div>
-      <div class="skill-bar-item"><span class="skill-bar-label">Швидке навчання</span><div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div></div>
+      <div class="skill-list-item">Командна робота</div>
+      <div class="skill-list-item">Комунікабельність</div>
+      <div class="skill-list-item">Увага до деталей</div>
+      <div class="skill-list-item">Швидке навчання</div>
     </div>
 
     <div class="sidebar-divider"></div>
@@ -98,12 +98,6 @@
       <section>
         <div class="section-label">Про мене</div>
         <p class="about-text parallax-text">Студент напряму Кібербезпека та захист інформації з практичним досвідом адміністрування мереж і системного захисту. Прагну розвивати навички в галузі інформаційної безпеки, мережевих технологій та системного адміністрування, застосовуючи аналітичне мислення для вирішення реальних задач.</p>
-      </section>
-
-      <!-- КАРТА НАВИЧОК -->
-      <section>
-        <div class="section-label">Карта навичок</div>
-        <div class="skills-grid" id="skills-grid"></div>
       </section>
 
       <!-- ТАЙМЛАЙН ОСВІТА -->
@@ -276,19 +270,6 @@
 })();
 
 // ============================================
-// 4. ПРОГРЕС-БАРИ
-// ============================================
-(function() {
-  var bars = document.querySelectorAll('.skill-bar-fill');
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.style.width = e.target.getAttribute('data-width') + '%'; obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.3 });
-  bars.forEach(function(b) { obs.observe(b); });
-})();
-
-// ============================================
 // 5. КУРСОР З ЧАСТИНКАМИ
 // ============================================
 (function() {
@@ -342,48 +323,6 @@
   }, { threshold: 0.5 });
   var hero = document.getElementById('hero');
   if (hero) heroObs.observe(hero);
-})();
-
-// ============================================
-// 8. КАРТА НАВИЧОК — ІНТЕРАКТИВНА СІТКА
-// ============================================
-(function() {
-  var skills = [
-    { name: 'Windows', level: 90, category: 'os' },
-    { name: 'Linux', level: 75, category: 'os' },
-    { name: 'TCP/IP', level: 80, category: 'network' },
-    { name: 'UDP', level: 78, category: 'network' },
-    { name: 'Cisco PT', level: 70, category: 'network' },
-    { name: 'Firewall', level: 68, category: 'security' },
-    { name: 'Antivirus', level: 82, category: 'security' },
-    { name: 'Net Hardening', level: 65, category: 'security' },
-    { name: 'Sys Protection', level: 72, category: 'security' },
-    { name: 'OSINT', level: 60, category: 'security' },
-    { name: 'Teamwork', level: 88, category: 'soft' },
-    { name: 'Attention', level: 92, category: 'soft' },
-  ];
-  var colors = { os: '#4a9a6a', network: '#00d4ff', security: '#e05a2a', soft: '#a78bfa' };
-  var grid = document.getElementById('skills-grid');
-  if (!grid) return;
-  skills.forEach(function(s) {
-    var card = document.createElement('div');
-    card.className = 'skill-card';
-    card.setAttribute('data-category', s.category);
-    card.innerHTML =
-      '<div class="skill-card-name">' + s.name + '</div>' +
-      '<div class="skill-card-bar"><div class="skill-card-fill" style="width:0%;background:' + colors[s.category] + '" data-width="' + s.level + '"></div></div>' +
-      '<div class="skill-card-pct">' + s.level + '%</div>';
-    card.addEventListener('mouseenter', function() { card.style.borderColor = colors[s.category]; card.style.boxShadow = '0 0 16px ' + colors[s.category] + '55'; });
-    card.addEventListener('mouseleave', function() { card.style.borderColor = ''; card.style.boxShadow = ''; });
-    grid.appendChild(card);
-  });
-  var cardFills = document.querySelectorAll('.skill-card-fill');
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.style.width = e.target.getAttribute('data-width') + '%'; obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.2 });
-  cardFills.forEach(function(f) { obs.observe(f); });
 })();
 
 // ============================================
